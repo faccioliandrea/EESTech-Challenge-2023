@@ -29,6 +29,13 @@
             {
               "client_id": "594819469357-lhbqj4k1tmhfnr5ujv1sl30qidnu3lcr.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "594819469357-7r8lijkmc17fodurhmqpcd8kfoojfuv8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.eestechChallenge2023"
+              }
             }
           ]
         }
