@@ -15,34 +15,50 @@ class _TriviaViewState extends State<TriviaView> {
   Widget build(BuildContext context) {
     CollectionReference trivia = FirebaseFirestore.instance.collection('Trivia');
     return Scaffold(
-      body: FutureBuilder(
-        future: trivia.get(),
-        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-          if (snapshot.hasError) {
-            return Text('Something went wrong');
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
+        title: Text("Trivia",
+          style: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold
+          ),),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.only(top: 0.0),
+        child: FutureBuilder(
+          future: trivia.get(),
+          builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            if (snapshot.hasError) {
+              return Text('Something went wrong');
+            }
+
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Text("Loading");
+            }
+
+            return ListView.builder(
+              itemCount: snapshot.data!.size,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TriviaCard(
+                    title: snapshot.data!.docs[index]["title"],
+                    clovers: snapshot.data!.docs[index]["clovers"],
+                    snapshot: snapshot.data!.docs[index],
+
+                  ),
+                );
+              },
+            );
+
+
+
+
+
+
           }
-
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Text("Loading");
-          }
-
-          return ListView.builder(
-            itemCount: snapshot.data!.size,
-            itemBuilder: (context, index) {
-              return TriviaCard(
-                title: snapshot.data!.docs[0]["title"],
-                clovers: snapshot.data!.docs[0]["clovers"],
-
-              );
-            },
-          );
-
-
-
-
-
-
-        }
+        ),
       ),
     );
   }

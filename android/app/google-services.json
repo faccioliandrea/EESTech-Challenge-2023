@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "594819469357",
+    "project_id": "eestech-a6d11",
+    "storage_bucket": "eestech-a6d11.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:594819469357:android:a2ec99dcdbd9dd2bb2a8a4",
+        "android_client_info": {
+          "package_name": "com.example.eestech_challenge_2023"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "594819469357-lhbqj4k1tmhfnr5ujv1sl30qidnu3lcr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtyIiVhtWNJKwbqJpU7zv0hRVeZvGDoq0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "594819469357-lhbqj4k1tmhfnr5ujv1sl30qidnu3lcr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

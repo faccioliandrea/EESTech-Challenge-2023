@@ -1,11 +1,17 @@
-<<<<<<< Updated upstream
-=======
+
 import 'package:eestech_challenge_2023/views/Trivia/trivia_view.dart';
 import 'package:firebase_core/firebase_core.dart';
->>>>>>> Stashed changes
-import 'package:flutter/material.dart';
 
-void main() {
+
+import 'package:flutter/material.dart';
+import 'firebase_options.dart';
+
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -30,7 +36,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const TriviaView(),
     );
   }
 }
