@@ -1,3 +1,8 @@
+<<<<<<< Updated upstream
+=======
+import 'package:eestech_challenge_2023/views/Trivia/trivia_view.dart';
+import 'package:firebase_core/firebase_core.dart';
+>>>>>>> Stashed changes
 import 'package:flutter/material.dart';
 
 void main() {
