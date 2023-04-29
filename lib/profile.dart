@@ -30,26 +30,29 @@ class Profile extends StatelessWidget {
         ],
       );
     } else {
-      return Column(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          SizedBox(height: 10),
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Text("List of achievements"),
-            ],
-          ),
-          SizedBox(height: 100, child: Achievements()),
-          SizedBox(height: 10),
-          ElevatedButton(
-              onPressed: () {
-                openLogin(context);
-              },
-              child: Text("Logout"))
-        ],
+      return Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            //SizedBox(height: 10),
+            Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text("List of achievements"),
+              ],
+            ),
+            SizedBox(height: 100, child: Achievements()),
+            SizedBox(height: 10),
+            ElevatedButton(
+                onPressed: () {
+                  openLogin(context);
+                },
+                child: Text("Logout"))
+          ],
+        ),
       );
     }
   }

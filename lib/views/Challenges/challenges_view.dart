@@ -10,42 +10,36 @@ class challengesView extends StatefulWidget {
 }
 
 class _challengesView extends State<challengesView> {
-
   @override
   Widget build(BuildContext context) {
-    CollectionReference challenges = FirebaseFirestore.instance.collection('Challenges');
+    CollectionReference challenges =
+        FirebaseFirestore.instance.collection('Challenges');
     return Scaffold(
       body: FutureBuilder(
-        future: challenges.get(),
-        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-          if (snapshot.hasError) {
-            return Text('Something went wrong');
-          }
+          future: challenges.get(),
+          builder:
+              (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            if (snapshot.hasError) {
+              return Center(child: Text('Something went wrong'));
+            }
 
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Text("Loading");
-          }
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Center(child: CircularProgressIndicator());
+            }
 
-          return ListView.builder(
-            itemCount: snapshot.data!.size,
-            itemBuilder: (context, index) {
-              return ChallengeCard(
-                title: snapshot.data!.docs[index]["title"],
-                clovers: snapshot.data!.docs[index]["clovers"],
-                target: snapshot.data!.docs[index]["target"],
-                date: snapshot.data!.docs[index]["date"],
-                description: snapshot.data!.docs[index]["description"],
-              );
-            },
-          );
-
-
-
-
-
-
-        }
-      ),
+            return ListView.builder(
+              itemCount: snapshot.data!.size,
+              itemBuilder: (context, index) {
+                return ChallengeCard(
+                  title: snapshot.data!.docs[index]["title"],
+                  clovers: snapshot.data!.docs[index]["clovers"],
+                  target: snapshot.data!.docs[index]["target"],
+                  date: snapshot.data!.docs[index]["date"],
+                  description: snapshot.data!.docs[index]["description"],
+                );
+              },
+            );
+          }),
     );
   }
 }

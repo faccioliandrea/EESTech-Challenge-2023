@@ -3,13 +3,14 @@ import 'package:eestech_challenge_2023/views/Trivia/trivia_play.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../../design.dart';
+
 class TriviaCard extends StatefulWidget {
   const TriviaCard({
     Key? key,
     required this.clovers,
     required this.title,
     required this.snapshot,
-
   }) : super(key: key);
 
   final int clovers;
@@ -26,63 +27,38 @@ class _TriviaCardState extends State<TriviaCard> {
     return SizedBox(
       height: 75,
       child: ElevatedButton(
-
-          style: ButtonStyle(
-
-              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-
-                  )
-              )
-          ),
-
-
+        style: elevatedButtonStyle,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
             children: [
-              Text(widget.title,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18
-                ),
-              ),
+              Text(widget.title, style: cardTextStyle),
               Row(
                 children: [
-                  Text(widget.clovers.toString(),
+                  Text(
+                    widget.clovers.toString(),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 8.0),
-                    child: Icon(FontAwesomeIcons.clover,
+                    child: Icon(
+                      FontAwesomeIcons.clover,
                       color: Colors.green,
-
-
                     ),
                   ),
-
                 ],
               )
-
             ],
-
-
-
-
           ),
         ),
-
-        onPressed: (){
+        onPressed: () {
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) =>  TriviaPlay(snapshot: widget.snapshot),
+              builder: (context) => TriviaPlay(snapshot: widget.snapshot),
             ),
           );
         },
       ),
     );
-
   }
 }

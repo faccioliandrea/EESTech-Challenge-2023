@@ -5,6 +5,8 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'dart:convert';
 
+import '../../design.dart';
+
 class LearnView extends StatelessWidget {
   const LearnView({super.key});
 
@@ -21,21 +23,34 @@ class LearnView extends StatelessWidget {
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => Lesson(
-                                    text: snapshot.data!.docs[index]['text'],
-                                    trivia: snapshot.data!.docs[index]
-                                        ['trivia'],
-                                    title: snapshot.data!.docs[index].id,
-                                  )),
-                        );
-                      },
-                      child:
-                          ListTile(title: Text(snapshot.data!.docs[index].id))),
+                  child: SizedBox(
+                    height: 75,
+                    child: ElevatedButton(
+                        style: elevatedButtonStyle,
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Lesson(
+                                      text: snapshot.data!.docs[index]['text'],
+                                      trivia: snapshot.data!.docs[index]
+                                          ['trivia'],
+                                      title: snapshot.data!.docs[index].id,
+                                    )),
+                          );
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            children: [
+                              Text(
+                                snapshot.data!.docs[index].id,
+                                style: cardTextStyle,
+                              )
+                            ],
+                          ),
+                        )),
+                  ),
                 );
               });
         } else {
