@@ -1,5 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:flutter/material.dart';
+
+import '../../dialogs/generic_dialog.dart';
+import 'package:firebase_auth/firebase_auth.dart' hide EmailAuthProvider;
 
 class TriviaPlay extends StatefulWidget {
   const TriviaPlay({Key? key,
@@ -40,18 +44,22 @@ class _TriviaPlayState extends State<TriviaPlay> {
                 return Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.fromLTRB(10,14,10,10),
                       child: Row(
                         children: [
                           Expanded(
                             child: Container(
                               decoration: BoxDecoration(
-                                color: Colors.blueGrey.shade100,
-                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.grey.shade200,
+                                borderRadius: BorderRadius.circular(15),
                               ),
                               child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(widget.snapshot["questions"][index]["question"]),
+                                padding: const EdgeInsets.all(15.0),
+                                child: Text(widget.snapshot["questions"][index]["question"],
+                                  style: TextStyle(
+                                    fontSize: 16
+                                  ),
+                                ),
                               ),
                             ),
                           ),
@@ -132,7 +140,7 @@ class _TriviaPlayState extends State<TriviaPlay> {
 
                   if(answered)
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding:  EdgeInsets.all(8.0),
                       child: Row(
                         children: [
                           Expanded(
@@ -149,6 +157,28 @@ class _TriviaPlayState extends State<TriviaPlay> {
                                   )
                               ),
                               onPressed: (){
+
+                                // update user balance and completed trivia
+                                if(controller.page==widget.snapshot["questions"].length-1){
+                                  FirebaseFirestore.instance.collection("Users").doc(FirebaseAuth.instance.currentUser!.uid).update(
+                                      {"clovers":  FieldValue.increment(widget.snapshot["clovers"]),
+                                        "trivia":  FieldValue.arrayUnion([(widget.snapshot.id)])
+
+
+                                      });
+                                  showGenericDialog(
+                                    context: context,
+                                    title: "Trivia completed!",
+                                    content: "You answered correctly to ${points} questions. You earned ${widget.snapshot["clovers"]} clovers.",
+                                    optionsBuilder: ()=>{
+                                      "Close":false,
+
+                                    },
+                                  ).then((value)  {
+                                    value ?? false;
+                                    Navigator.pop(context);
+                                  });
+                                }
                                 // reset answer state for next question
                                  answer = null;
                                  selectedColor = Colors.blue;
@@ -184,7 +214,7 @@ class _TriviaPlayState extends State<TriviaPlay> {
                   child: Row(
                     children: [
                       Text(
-                        "Risposte esatte:",
+                        "Correct answers:",
                         style: TextStyle(
                           fontSize: 19
                         ),

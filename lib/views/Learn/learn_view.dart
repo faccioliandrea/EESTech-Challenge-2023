@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:eestech_challenge_2023/views/Trivia/trivia_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -88,8 +89,22 @@ class Lesson extends StatelessWidget {
                 data: decodedText,
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const TriviaView()),
+                  );
+                },
                 child: Text("Start Trivia about this lesson!"),
+                style: ButtonStyle(
+                    backgroundColor:  MaterialStatePropertyAll<Color>(Color(0xffF21B3F)),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+
+                        )
+                    )
+                ),
               )
             ],
           ),
