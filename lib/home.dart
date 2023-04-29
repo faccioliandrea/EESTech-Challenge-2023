@@ -1,6 +1,6 @@
-import 'package:eestech_challenge_2023/learning.dart';
 import 'package:eestech_challenge_2023/profile.dart';
 import 'package:eestech_challenge_2023/views/Challenges/challenges_view.dart';
+import 'package:eestech_challenge_2023/views/Learn/learn_view.dart';
 import 'package:eestech_challenge_2023/views/Trivia/trivia_view.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +14,7 @@ class Page {
 
 final list = [
   Page("Challenge", Icons.home, challengesView()),
-  Page("Learn", Icons.school, Learning()),
+  Page("Learn", Icons.school, LearnView()),
   Page("Leaderboard", Icons.school, View()),
   Page("Profile", Icons.school, Profile()),
   Page("Trivia", Icons.question_mark, TriviaView()),
@@ -34,7 +34,7 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text("Home"),
+        title: Text(list.elementAt(selectedIndex).name),
       ),
       body: list.elementAt(selectedIndex).view,
       bottomNavigationBar: BottomNavigationBar(

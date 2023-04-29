@@ -10,31 +10,22 @@ class TriviaView extends StatefulWidget {
 }
 
 class _TriviaViewState extends State<TriviaView> {
-
   @override
   Widget build(BuildContext context) {
-    CollectionReference trivia = FirebaseFirestore.instance.collection('Trivia');
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
-        title: Text("Trivia",
-          style: TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.bold
-          ),),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.only(top: 0.0),
-        child: FutureBuilder(
+    CollectionReference trivia =
+        FirebaseFirestore.instance.collection('Trivia');
+    return Padding(
+      padding: const EdgeInsets.only(top: 0.0),
+      child: FutureBuilder(
           future: trivia.get(),
-          builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          builder:
+              (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasError) {
-              return Text('Something went wrong');
+              return Center(child: Text('Something went wrong'));
             }
 
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Text("Loading");
+              return Center(child: CircularProgressIndicator());
             }
 
             return ListView.builder(
@@ -46,20 +37,11 @@ class _TriviaViewState extends State<TriviaView> {
                     title: snapshot.data!.docs[index]["title"],
                     clovers: snapshot.data!.docs[index]["clovers"],
                     snapshot: snapshot.data!.docs[index],
-
                   ),
                 );
               },
             );
-
-
-
-
-
-
-          }
-        ),
-      ),
+          }),
     );
   }
 }

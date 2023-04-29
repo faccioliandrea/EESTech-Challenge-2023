@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eestech_challenge_2023/home.dart';
-import 'package:eestech_challenge_2023/leaderboard.dart';
+import 'package:eestech_challenge_2023/views/Leaderboard/leaderboard.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';

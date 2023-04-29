@@ -5,8 +5,8 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'dart:convert';
 
-class Learning extends StatelessWidget {
-  const Learning({super.key});
+class LearnView extends StatelessWidget {
+  const LearnView({super.key});
 
   @override
   Widget build(BuildContext context) {
