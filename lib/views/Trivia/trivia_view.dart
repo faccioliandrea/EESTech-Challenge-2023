@@ -34,7 +34,6 @@ class _TriviaViewState extends State<TriviaView> {
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TriviaCard(
-
                     snapshot: snapshot.data!.docs[index],
                   ),
                 );

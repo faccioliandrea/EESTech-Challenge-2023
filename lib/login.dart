@@ -28,7 +28,9 @@ class Login extends StatelessWidget {
             'clovers': 0,
             'cloversToday': 0,
             'cloversWeek': 0,
-            'cloverMonth': 0
+            'cloverMonth': 0,
+            'trivia': {},
+            'challenges': {},
           });
         }),
         AuthStateChangeAction<SignedIn>((context, state) {
