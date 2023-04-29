@@ -44,18 +44,22 @@ class _TriviaPlayState extends State<TriviaPlay> {
                 return Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.fromLTRB(10,14,10,10),
                       child: Row(
                         children: [
                           Expanded(
                             child: Container(
                               decoration: BoxDecoration(
-                                color: Colors.blueGrey.shade100,
-                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.grey.shade200,
+                                borderRadius: BorderRadius.circular(15),
                               ),
                               child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(widget.snapshot["questions"][index]["question"]),
+                                padding: const EdgeInsets.all(15.0),
+                                child: Text(widget.snapshot["questions"][index]["question"],
+                                  style: TextStyle(
+                                    fontSize: 16
+                                  ),
+                                ),
                               ),
                             ),
                           ),
