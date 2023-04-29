@@ -50,8 +50,6 @@ class _ChallengeCard extends State<ChallengeCard> {
               child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-            
-              
             Flexible(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -86,7 +84,6 @@ class _ChallengeCard extends State<ChallengeCard> {
                           ),
                         ],
                       ),
-                      const SizedBox(width: 8),
                     ],
                   ),
               ),
