@@ -32,9 +32,22 @@ class _ChallengeCard extends State<ChallengeCard> {
   DocumentReference user = FirebaseFirestore.instance.collection('Users').doc(FirebaseAuth.instance.currentUser!.uid);
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Card(
-      
-          child: Row(
+      child: FutureBuilder(
+        future: user.get(),
+        builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+          if (snapshot.hasError) {
+            return Text("Something went wrong");
+          }
+
+          if (snapshot.hasData && !snapshot.data!.exists) {
+            return Text("Document does not exist");
+          }
+
+          if (snapshot.connectionState == ConnectionState.done) {
+            Map<String, dynamic> data = snapshot.data!.data() as Map<String, dynamic>;
+            return Card(
+              color: data["challenges"].contains(widget.title)  ? Color(0xffFF9914): Color(0xff08BDBD),
+              child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
             
@@ -100,7 +113,13 @@ class _ChallengeCard extends State<ChallengeCard> {
               ),   
             ],
           ),
-        ),
+          );   
+          }
+
+          return Text("loading");
+
+        }
+    ),
     );
   }
 }
