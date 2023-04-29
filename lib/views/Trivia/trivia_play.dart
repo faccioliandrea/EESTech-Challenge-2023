@@ -162,16 +162,16 @@ class _TriviaPlayState extends State<TriviaPlay> {
                                 if(controller.page==widget.snapshot["questions"].length-1){
                                   FirebaseFirestore.instance.collection("Users").doc(FirebaseAuth.instance.currentUser!.uid).update(
                                       {"clovers":  FieldValue.increment(widget.snapshot["clovers"]),
-                                        "trivia": {
-                                          "${widget.snapshot.id}" ,
-                                        }
+                                        "trivia":  FieldValue.arrayUnion([(widget.snapshot.id)])
+
+
                                       });
                                   showGenericDialog(
                                     context: context,
-                                    title: "Trivia completato!",
-                                    content: "Hai risposto correttamente a ${points} domanda. Ti abbiamo accreditato ${widget.snapshot["clovers"]} quadrifogli.",
+                                    title: "Trivia completed!",
+                                    content: "You answered correctly to ${points} questions. You earned ${widget.snapshot["clovers"]} clovers.",
                                     optionsBuilder: ()=>{
-                                      "Chiudi":false,
+                                      "Close":false,
 
                                     },
                                   ).then((value)  {
@@ -214,7 +214,7 @@ class _TriviaPlayState extends State<TriviaPlay> {
                   child: Row(
                     children: [
                       Text(
-                        "Risposte esatte:",
+                        "Correct answers:",
                         style: TextStyle(
                           fontSize: 19
                         ),

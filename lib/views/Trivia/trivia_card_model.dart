@@ -115,7 +115,7 @@ class _TriviaCardState extends State<TriviaCard> {
             );
           }
 
-          return Text("loading");
+          return CircularProgressIndicator();
 
         }
       ),
