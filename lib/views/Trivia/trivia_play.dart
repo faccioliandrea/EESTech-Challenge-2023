@@ -1,5 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:flutter/material.dart';
+
+import '../../dialogs/generic_dialog.dart';
+import 'package:firebase_auth/firebase_auth.dart' hide EmailAuthProvider;
 
 class TriviaPlay extends StatefulWidget {
   const TriviaPlay({Key? key,
@@ -132,7 +136,7 @@ class _TriviaPlayState extends State<TriviaPlay> {
 
                   if(answered)
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding:  EdgeInsets.all(8.0),
                       child: Row(
                         children: [
                           Expanded(
@@ -149,6 +153,28 @@ class _TriviaPlayState extends State<TriviaPlay> {
                                   )
                               ),
                               onPressed: (){
+
+                                // update user balance and completed trivia
+                                if(controller.page==widget.snapshot["questions"].length-1){
+                                  FirebaseFirestore.instance.collection("Users").doc(FirebaseAuth.instance.currentUser!.uid).update(
+                                      {"clovers":  FieldValue.increment(widget.snapshot["clovers"]),
+                                        "trivia": {
+                                          "${widget.snapshot.id}" ,
+                                        }
+                                      });
+                                  showGenericDialog(
+                                    context: context,
+                                    title: "Trivia completato!",
+                                    content: "Hai risposto correttamente a ${points} domanda. Ti abbiamo accreditato ${widget.snapshot["clovers"]} quadrifogli.",
+                                    optionsBuilder: ()=>{
+                                      "Chiudi":false,
+
+                                    },
+                                  ).then((value)  {
+                                    value ?? false;
+                                    Navigator.pop(context);
+                                  });
+                                }
                                 // reset answer state for next question
                                  answer = null;
                                  selectedColor = Colors.blue;
