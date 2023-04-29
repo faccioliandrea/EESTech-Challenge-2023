@@ -1,5 +1,7 @@
 import 'package:eestech_challenge_2023/learning.dart';
 import 'package:eestech_challenge_2023/profile.dart';
+import 'package:eestech_challenge_2023/views/Challenges/challenges_view.dart';
+import 'package:eestech_challenge_2023/views/Trivia/trivia_view.dart';
 import 'package:flutter/material.dart';
 
 class Page {
@@ -11,11 +13,11 @@ class Page {
 }
 
 final list = [
-  Page("Challenge", Icons.home, View()),
+  Page("Challenge", Icons.home, challengesView()),
   Page("Learn", Icons.school, Learning()),
   Page("Leaderboard", Icons.school, View()),
   Page("Profile", Icons.school, Profile()),
-  Page("Trivia", Icons.question_mark, View()),
+  Page("Trivia", Icons.question_mark, TriviaView()),
 ];
 
 class Home extends StatefulWidget {
